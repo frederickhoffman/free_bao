@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/frederickhoffman/free_bao/main/assets/banner.png" width="100%" alt="FREE-BAO Banner">
+  <img src="assets/banner.png" width="100%" alt="FREE-BAO Banner">
 </p>
 
 # 🦅 FREE-BAO: Frequency-Regularized Experience Efficiency for Behavioral Agentic Optimization
