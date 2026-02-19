@@ -11,15 +11,22 @@
 [![Framework: LangGraph](https://img.shields.io/badge/framework-LangGraph-orange)](https://langchain-ai.github.io/langgraph/)
 [![Monitoring: WandB](https://img.shields.io/badge/monitoring-Weights%20&%20Biases-gold)](https://wandb.ai/)
 
-**FREE-BAO** is a training-free framework that achieves Pareto-optimal behavior in proactive agents. By leveraging **Multi-Objective Contextual Experience Replay (MO-CER)**, FREE-BAO allows agents to optimize for both *success* and *efficiency* (minimizing user bother) without any gradient updates or reward modeling.
+**FREE-BAO** is a training-free framework that achieves Pareto-optimal behavior in proactive agents. By leveraging **Contextual Experience Replay (CER)**, FREE-BAO allows agents to optimize for both *success* and *efficiency* (minimizing user bother) without any gradient updates or reward modeling.
 
 ---
 
-## 📈 Performance vs. Paper Benchmarks
+## 📈 Motivation & Lineage
 
-FREE-BAO replicates the Pareto-optimal performance described in the [BAO Paper](https://arxiv.org/abs/2410.05284), achieving the efficiency of RL-tuned agents without the massive compute overhead.
+FREE-BAO bridges the gap between high-performance proactive agents and computational efficiency. It is built upon the synthesis of two core research frameworks:
 
-| Method | Success Rate (%) | Avg Turns (Efficiency) | Compute Cost (Training) |
+1.  **Behavioral Agentic Optimization (BAO)**: Defined in [*Pushing Forward Pareto Frontiers of Proactive Agents with Behavioral Agentic Optimization*](https://arxiv.org/abs/2410.05284), which establishes the Multi-Objective goal of balancing success vs. user engagement.
+2.  **Contextual Experience Replay (CER)**: Inspired by [*Contextual Experience Replay for Self-Improvement of Language Agents*](https://arxiv.org/abs/2506.06698), providing a training-free mechanism for agents to learn from environment dynamics and successful historical trajectories during inference.
+
+By combining these, **FREE-BAO** replicates the efficiency results of RL-tuned agents (3.0 average turns vs. 5.2 for ReAct) using a purely memory-augmented architecture.
+
+---
+
+## 📈 Performance Comparison
 | :--- | :---: | :---: | :---: |
 | **ReAct (Baseline)** | 98.0% | 5.2 | $0 (Zero-Shot) |
 | **BAO (PPO/DPO)** | 97.5% | 3.1 | ~$2,000 (GPU Cloud) |

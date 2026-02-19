@@ -1,7 +1,7 @@
 import argparse
 import os
 from free_bao.utils import load_keys_from_bashrc
-from free_bao.memory.mo_cer import MOCER
+from free_bao.memory.cer import CER
 from free_bao.simulation.benchmark import BenchmarkRunner
 from free_bao.agent.react_agent import FreeBaoAgent
 
@@ -17,7 +17,7 @@ def main():
     
     args = parser.parse_args()
     
-    memory = MOCER(alpha=args.alpha)
+    memory = CER(alpha=args.alpha)
     
     if args.mode == "benchmark":
         runner = BenchmarkRunner(memory, dataset_path=args.dataset)

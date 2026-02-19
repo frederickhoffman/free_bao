@@ -3,7 +3,7 @@ import pandas as pd
 from tqdm import tqdm
 from free_bao.agent.react_agent import FreeBaoAgent, AgentState
 from free_bao.simulation.user_simulator import UserSimulator
-from free_bao.memory.mo_cer import MOCER, Episode
+from free_bao.memory.cer import CER, Episode
 from langchain_core.messages import HumanMessage, AIMessage, BaseMessage
 from typing import List
 
@@ -17,7 +17,7 @@ TASKS = [
 ]
 
 class BenchmarkRunner:
-    def __init__(self, memory: MOCER, project_name: str = "free_bao_benchmark", dataset_path: str = None):
+    def __init__(self, memory: CER, project_name: str = "free_bao_benchmark", dataset_path: str = None):
         self.memory = memory
         self.user_sim = UserSimulator()
         self.project_name = project_name

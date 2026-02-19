@@ -6,7 +6,7 @@ from typing import List, Dict, Any, Tuple
 from langgraph.graph import StateGraph, END
 from langgraph.prebuilt import ToolNode
 import operator
-from free_bao.memory.mo_cer import MOCER
+from free_bao.memory.cer import CER
 
 # --- Tools ---
 @tool
@@ -30,7 +30,7 @@ class AgentState(TypedDict):
 
 # --- Agent Class ---
 class FreeBaoAgent:
-    def __init__(self, memory: MOCER, model_name: str = "gpt-4o-mini"):
+    def __init__(self, memory: CER, model_name: str = "gpt-4o-mini"):
         self.memory = memory
         self.llm = ChatOpenAI(model=model_name, temperature=0).bind_tools(tools)
         self.system_template = """You are a helpful and EFFICIENT assistant.
