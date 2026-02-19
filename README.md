@@ -64,32 +64,33 @@ export WANDB_API_KEY="your_key_here"
 
 ### 3. Execution (Reproduction Pipeline)
 
-Run a complete evaluation benchmark with a single command. This will execute the proactive agent through the **UserRL** simulation, measuring success rates and turn efficiency.
+Run a complete evaluation benchmark with a single command. The pipeline automatically handles the **Dual-Phase Execution** design:
+
+1.  **Phase 1: Internal Warmup**: The agent runs a series of "learning" episodes where successful trajectories are automatically added to the **FreeBaoMemory**.
+2.  **Phase 2: Measurement**: The agent then performs the evaluation episodes, leveraging its newly populated memory to optimize for the Pareto frontier (success vs. turns).
 
 ```bash
 uv run python src/free_bao/main.py \
     --mode benchmark \
     --benchmark-mode eval \
+    --warmup-episodes 10 \
     --episodes 50 \
     --alpha 0.5 \
     --dataset path/to/dataset.json
 ```
 
 > [!TIP]
-> Use `--episodes` to scale the benchmark, `--alpha` to tune the Pareto trade-off between success and turn efficiency, and `--dataset` to load custom task suites.
+> **Scaling & Tuning**: Increase `--warmup-episodes` to improve proactivity. Adjust `--alpha` (0.0 to 1.0) to prioritize success (low alpha) or turn efficiency (high alpha).
 
 ---
 
-## 🛠️ Key Features
+## 🏗️ Evaluation Design
 
-*   **Pareto-Efficient Retrieval**: Automatically weights similarity vs. efficiency via tunable $\alpha$.
-*   **Plug-and-Play**: Seamlessly integrates with `langgraph` and `chromadb`.
-*   **Fully Traceable**: Comprehensive logging to Weights & Biases for all benchmark runs.
-*   **Interactive UI Mode**: Test the agent's proactive behavior in a real-time CLI loop.
+**FREE-BAO**'s evaluation is built on a **User-in-the-Loop RL Simulation** using `langgraph`. 
 
-```bash
-uv run python src/free_bao/main.py --mode ui
-```
+- **Success Matching**: Success is determined by the agent's ability to trigger the correct tool outputs (e.g., flight bookings, hotel confirmations) within the interaction loop.
+- **Turn Efficiency**: The framework penalizes "user bother" by weighting the number of turns in the Pareto-efficient retrieval logic.
+- **WandB Integration**: All runs are fully traceable, with detailed results tables logged directly to your Weights & Biases project.
 
 ---
 
