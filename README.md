@@ -63,26 +63,19 @@ export WANDB_API_KEY="your_key_here"
 
 ### 3. Execution (Reproduction Pipeline)
 
-#### Phase A: Memory Warmup (10 Episodes)
-Populate the **FREE-BAO** memory bank with successful trajectories.
-```bash
-uv run python src/free_bao/main.py --mode benchmark --benchmark-mode warmup --episodes 10
-```
+Run a complete evaluation benchmark with a single command. This will execute the proactive agent through the **UserRL** simulation, measuring success rates and turn efficiency.
 
-#### Phase B: Evaluation (Reproduce Metrics)
-Run the agent in evaluation mode to measure success rate and turn count.
 ```bash
-uv run python src/free_bao/main.py --mode benchmark --benchmark-mode eval --episodes 50
-```
-
-#### Phase C: Scaling & Tuning (High Performance)
-Run large-scale benchmarks with custom datasets and Pareto weights.
-```bash
-uv run python src/free_bao/main.py --mode benchmark \
-    --episodes 500 \
+uv run python src/free_bao/main.py \
+    --mode benchmark \
+    --benchmark-mode eval \
+    --episodes 50 \
     --alpha 0.5 \
     --dataset path/to/dataset.json
 ```
+
+> [!TIP]
+> Use `--episodes` to scale the benchmark, `--alpha` to tune the Pareto trade-off between success and turn efficiency, and `--dataset` to load custom task suites.
 
 ---
 
