@@ -94,13 +94,24 @@ uv run python src/free_bao/main.py \
 
 ---
 
-## 🛡️ Development & Quality
+## 🛠️ Development & Integrity
 
-Ensure standard compliance with pre-commit hooks:
+FREE-BAO maintains high code standards through automated quality gates. 
+
+### 1. Pre-commit Hooks
+Quality checks are enforced automatically during the `git commit` process. To set up the hooks in your local environment:
+
+```bash
+uv run pre-commit install
+```
+
+### 2. Manual Integrity Checks
+You can also run the full suite manually at any time:
+
 ```bash
 uv run pre-commit run --all-files
 ```
 
-- **Ruff**: Critical linting and auto-formatting.
-- **Mypy**: Rigorous static type checking.
-- **Pytest**: Unit testing for **CER** and Agent logic.
+- **Ruff**: Enforces strict linting and consistent auto-formatting.
+- **Mypy**: Performs rigorous static type checking for agent logic.
+- **Pytest**: Validates the **FreeBaoMemory** and proactive decision-making.
