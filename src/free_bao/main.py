@@ -12,6 +12,7 @@ def main():
     parser.add_argument("--mode", choices=["ui", "benchmark"], default="benchmark", help="Mode to run")
     parser.add_argument("--benchmark-mode", choices=["warmup", "eval"], default="eval", help="benchmark phase")
     parser.add_argument("--episodes", type=int, default=5, help="Number of episodes")
+    parser.add_argument("--warmup-episodes", type=int, default=0, help="Number of warmup episodes to run before eval")
     parser.add_argument("--alpha", type=float, default=0.1, help="Pareto weight for efficiency (alpha)")
     parser.add_argument("--dataset", type=str, default=None, help="Path to dataset file (csv/json)")
     
@@ -21,7 +22,7 @@ def main():
     
     if args.mode == "benchmark":
         runner = BenchmarkRunner(memory, dataset_path=args.dataset)
-        runner.run_benchmark(num_episodes=args.episodes, mode=args.benchmark_mode)
+        runner.run_benchmark(num_episodes=args.episodes, mode=args.benchmark_mode, warmup_episodes=args.warmup_episodes)
         
     elif args.mode == "ui":
         print("Starting LangGraph UI mode (Simulated CLI for now)...")
