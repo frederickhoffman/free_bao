@@ -31,7 +31,10 @@ By combining the multi-objective goals of **BAO** with the training-free archite
 | :--- | :---: | :---: | :---: |
 | **ReAct (Baseline)** | 98.0% | 5.2 | $0 (Zero-Shot) |
 | **BAO (PPO/DPO)** | 97.5% | 3.1 | ~$2,000 (GPU Cloud) |
-| **FREE-BAO (Ours)** | **98.2%** | **3.0** | **$0 (Memory-Augmented)** |
+| **FREE-BAO (Ours)** | *Run Eval* | *Run Eval* | **$0 (Memory-Augmented)** |
+
+> [!NOTE]
+> **Performance Targets**: The values for **FREE-BAO** are targets based on the research synthesis of BAO and CER. Use the provided reproduction pipeline to measure and log your results to WandB.
 
 > [!IMPORTANT]
 > **FREE-BAO** targets a significant reduction in user bother compared to standard ReAct agents by proactively learning from successful historical trajectories.
