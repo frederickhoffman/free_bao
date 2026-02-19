@@ -27,6 +27,7 @@ By combining the multi-objective goals of **BAO** with the training-free archite
 ---
 
 ## 📈 Performance Comparison
+| Method | Success Rate (%) | Avg Turns (Efficiency) | Compute Cost (Training) |
 | :--- | :---: | :---: | :---: |
 | **ReAct (Baseline)** | 98.0% | 5.2 | $0 (Zero-Shot) |
 | **BAO (PPO/DPO)** | 97.5% | 3.1 | ~$2,000 (GPU Cloud) |
