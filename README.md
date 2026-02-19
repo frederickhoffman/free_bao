@@ -11,7 +11,7 @@
 [![Framework: LangGraph](https://img.shields.io/badge/framework-LangGraph-orange)](https://langchain-ai.github.io/langgraph/)
 [![Monitoring: WandB](https://img.shields.io/badge/monitoring-Weights%20&%20Biases-gold)](https://wandb.ai/)
 
-**FREE-BAO** is a training-free framework that achieves Pareto-optimal behavior in proactive agents. By leveraging **Contextual Experience Replay (CER)**, FREE-BAO allows agents to optimize for both *success* and *efficiency* (minimizing user bother) without any gradient updates or reward modeling.
+**FREE-BAO** is a training-free framework that achieves Pareto-optimal behavior in proactive agents. By leveraging its core mechanism, **FREE-BAO** allows agents to optimize for both *success* and *efficiency* (minimizing user bother) without any gradient updates or reward modeling.
 
 ---
 
@@ -22,7 +22,7 @@ FREE-BAO bridges the gap between high-performance proactive agents and computati
 1.  **Behavioral Agentic Optimization (BAO)**: Defined in [*Pushing Forward Pareto Frontiers of Proactive Agents with Behavioral Agentic Optimization*](https://arxiv.org/abs/2410.05284), which establishes the Multi-Objective goal of balancing success vs. user engagement.
 2.  **Contextual Experience Replay (CER)**: Inspired by [*Contextual Experience Replay for Self-Improvement of Language Agents*](https://arxiv.org/abs/2506.06698), providing a training-free mechanism for agents to learn from environment dynamics and successful historical trajectories during inference.
 
-By combining these, **FREE-BAO** replicates the efficiency results of RL-tuned agents (3.0 average turns vs. 5.2 for ReAct) using a purely memory-augmented architecture.
+By combining these, **FREE-BAO** aims to replicate the efficiency results of RL-tuned agents (3.0 average turns vs. 5.2 for ReAct) using a purely memory-augmented architecture.
 
 ---
 
@@ -33,7 +33,7 @@ By combining these, **FREE-BAO** replicates the efficiency results of RL-tuned a
 | **FREE-BAO (Ours)** | **98.2%** | **3.0** | **$0 (Memory-Augmented)** |
 
 > [!IMPORTANT]
-> **FREE-BAO** provides a **42% reduction in user bother** compared to standard ReAct agents by proactively learning from successful historical trajectories.
+> **FREE-BAO** targets a significant reduction in user bother compared to standard ReAct agents by proactively learning from successful historical trajectories.
 
 ---
 
@@ -64,7 +64,7 @@ export WANDB_API_KEY="your_key_here"
 ### 3. Execution (Reproduction Pipeline)
 
 #### Phase A: Memory Warmup (10 Episodes)
-Populate the MO-CER memory bank with successful trajectories.
+Populate the **FREE-BAO** memory bank with successful trajectories.
 ```bash
 uv run python src/free_bao/main.py --mode benchmark --benchmark-mode warmup --episodes 10
 ```
@@ -108,4 +108,4 @@ uv run pre-commit run --all-files
 
 - **Ruff**: Critical linting and auto-formatting.
 - **Mypy**: Rigorous static type checking.
-- **Pytest**: Unit testing for MO-CER and Agent logic.
+- **Pytest**: Unit testing for **CER** and Agent logic.
