@@ -14,7 +14,7 @@ class Episode:
     turns: int
     metadata: Dict[str, Any] = dataclasses.field(default_factory=dict)
 
-class CER:
+class FreeBaoMemory:
     def __init__(self, collection_name: str = "free_bao_memory", persist_directory: str = "./memory_db", alpha: float = 0.1):
         self.client = chromadb.Client(Settings(persist_directory=persist_directory, is_persistent=True))
         self.collection = self.client.get_or_create_collection(name=collection_name)

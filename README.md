@@ -11,18 +11,18 @@
 [![Framework: LangGraph](https://img.shields.io/badge/framework-LangGraph-orange)](https://langchain-ai.github.io/langgraph/)
 [![Monitoring: WandB](https://img.shields.io/badge/monitoring-Weights%20&%20Biases-gold)](https://wandb.ai/)
 
-**FREE-BAO** is a training-free framework that achieves Pareto-optimal behavior in proactive agents. By leveraging its core mechanism, **FREE-BAO** allows agents to optimize for both *success* and *efficiency* (minimizing user bother) without any gradient updates or reward modeling.
+**FREE-BAO** is a training-free framework that achieves Pareto-optimal behavior in proactive agents. Developed in this repository, **FREE-BAO** is a combination of **Contextual Experience Replay (CER)** and **Behavioral Agentic Optimization (BAO)**, allowing agents to optimize for both *success* and *efficiency* (minimizing user bother) without any gradient updates or reward modeling.
 
 ---
 
 ## 📈 Motivation & Lineage
 
-FREE-BAO bridges the gap between high-performance proactive agents and computational efficiency. It is built upon the synthesis of two core research frameworks:
+FREE-BAO bridges the gap between high-performance proactive agents and computational efficiency. It is the synthesis of two core research frameworks:
 
 1.  **Behavioral Agentic Optimization (BAO)**: Defined in [*Pushing Forward Pareto Frontiers of Proactive Agents with Behavioral Agentic Optimization*](https://arxiv.org/abs/2410.05284), which establishes the Multi-Objective goal of balancing success vs. user engagement.
-2.  **Contextual Experience Replay (CER)**: Inspired by [*Contextual Experience Replay for Self-Improvement of Language Agents*](https://arxiv.org/abs/2506.06698), providing a training-free mechanism for agents to learn from environment dynamics and successful historical trajectories during inference.
+2.  **Contextual Experience Replay (CER)**: Inspired by [*Contextual Experience Replay for Self-Improvement of Language Agents*](https://arxiv.org/abs/2506.06698), providing the training-free mechanism for agents to learn from environment dynamics and successful historical trajectories during inference.
 
-By combining these, **FREE-BAO** aims to replicate the efficiency results of RL-tuned agents (3.0 average turns vs. 5.2 for ReAct) using a purely memory-augmented architecture.
+By combining the multi-objective goals of **BAO** with the training-free architecture of **CER**, **FREE-BAO** aims to replicate the efficiency results of RL-tuned agents (3.0 average turns vs. 5.2 for ReAct) using a purely memory-augmented implementation.
 
 ---
 
