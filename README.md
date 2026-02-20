@@ -73,7 +73,7 @@ Run a complete evaluation benchmark with a single command. The pipeline automati
 2.  **Phase 2: Measurement**: The agent then performs the evaluation episodes, leveraging its newly populated memory to optimize for the Pareto frontier (success vs. turns).
 
 ```bash
-uv run python src/free_bao/main.py \
+uv run python main.py \
     --mode benchmark \
     --benchmark-mode eval \
     --warmup-episodes 10 \
@@ -94,6 +94,19 @@ uv run python src/free_bao/main.py \
 - **Success Matching**: Success is determined by the agent's ability to trigger the correct tool outputs (e.g., flight bookings, hotel confirmations) within the interaction loop.
 - **Turn Efficiency**: The framework penalizes "user bother" by weighting the number of turns in the Pareto-efficient retrieval logic.
 - **WandB Integration**: All runs are fully traceable, with detailed results tables logged directly to your Weights & Biases project.
+
+---
+
+## 🛠️ Key Features
+
+*   **Pareto-Efficient Retrieval**: Automatically weights similarity vs. efficiency via tunable $\alpha$.
+*   **Plug-and-Play**: Seamlessly integrates with `langgraph` and `chromadb`.
+*   **Fully Traceable**: Comprehensive logging to Weights & Biases for all benchmark runs.
+*   **Interactive UI Mode**: Test the agent's proactive behavior in a real-time CLI loop.
+
+```bash
+uv run python main.py --mode ui
+```
 
 ---
 

@@ -1,13 +1,14 @@
 import wandb
 import pandas as pd
 from tqdm import tqdm
-from free_bao.agent.react_agent import FreeBaoAgent, AgentState
-from free_bao.simulation.user_simulator import UserSimulator
-from free_bao.memory.memory import FreeBaoMemory, Episode
+from agent.react_agent import FreeBaoAgent, AgentState
+from simulation.user_simulator import UserSimulator
+from memory.memory import FreeBaoMemory, Episode
 from langchain_core.messages import HumanMessage, AIMessage, BaseMessage
 from typing import List
 
 # --- Synthetic Dataset ---
+# --- Synthetic Dataset (Legacy) ---
 TASKS = [
     {"goal": "I want to fly to Paris for under $500", "task": "Help the user book a flight."},
     {"goal": "I need a hotel in Tokyo for March 1st, budget is flexible but prefer under $200", "task": "Find a hotel for the user."},
@@ -15,6 +16,23 @@ TASKS = [
     {"goal": "I want a flight to London, business class, any price", "task": "Book a flight."},
     {"goal": "Find me a hotel in Berlin for next weekend", "task": "Find a hotel."},
 ]
+
+# --- UserRL Benchmark (Qian et al. 2025c) ---
+USER_RL_TASKS = {
+    "Function-Gym": [
+        {"goal": "Call the search_flights function for a route from JFK to LAX on 2024-10-10", "task": "Search for flights."},
+        {"goal": "Use the get_weather tool for London today", "task": "Check the weather."},
+        {"goal": "Invoke the book_hotel function for Paris, 2 nights, starting tomorrow", "task": "Book a hotel."},
+    ],
+    "Telepathy-Gym": [
+        {"goal": "The user wants a quiet room but won't say it unless prompted about preferences", "task": "Help the user find a room."},
+        {"goal": "The user has a hidden budget of $150 for the flight", "task": "Find a flight."},
+    ],
+    "Turtle-Gym": [
+        {"goal": "The user follows a complex narrative: they are visiting a sick relative and need a hotel near the hospital", "task": "Assist the user with their travel plans."},
+        {"goal": "Multi-step reasoning: find a flight, then a train, then a hotel that accepts pets", "task": "Plan a multi-leg trip."},
+    ]
+}
 
 class BenchmarkRunner:
     def __init__(self, memory: FreeBaoMemory, project_name: str = "free_bao_benchmark", dataset_path: str = None):
@@ -24,6 +42,10 @@ class BenchmarkRunner:
         self.dataset = self.load_dataset(dataset_path)
 
     def load_dataset(self, dataset_path: str = None) -> List[dict]:
+        if dataset_path in USER_RL_TASKS:
+            print(f"Loading UserRL Benchmark: {dataset_path}")
+            return USER_RL_TASKS[dataset_path]
+        
         if dataset_path:
             # Simple assumption: CSV with 'goal' and 'task' columns
             # Or JSON list of dicts
@@ -35,7 +57,7 @@ class BenchmarkRunner:
                  with open(dataset_path, "r") as f:
                      return json.load(f)
             else:
-                 print(f"Unknown file extension for {dataset_path}, falling back to synthetic.")
+                 print(f"Unknown file extension or dataset name for {dataset_path}, falling back to synthetic.")
                  return TASKS
         return TASKS
 
@@ -83,10 +105,10 @@ class BenchmarkRunner:
             trajectory = ""
             success = False
             
-            # Interaction Loop
+            # Interaction Loop (UserRL Spec: 15 turns max)
             current_messages = [HumanMessage(content=task)]
             
-            for step in range(10): # Max 10 turns
+            for step in range(15): 
                 # Agent acts
                 result = app.invoke({"messages": current_messages, "task": task})
                 

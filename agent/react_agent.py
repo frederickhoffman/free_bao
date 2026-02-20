@@ -6,7 +6,7 @@ from typing import List, Dict, Any, Tuple
 from langgraph.graph import StateGraph, END
 from langgraph.prebuilt import ToolNode
 import operator
-from free_bao.memory.memory import FreeBaoMemory
+from memory.memory import FreeBaoMemory
 
 # --- Tools ---
 @tool
