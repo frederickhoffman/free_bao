@@ -79,8 +79,11 @@ uv run python main.py \
     --warmup-episodes 10 \
     --episodes 50 \
     --alpha 0.5 \
-    --dataset path/to/dataset.json
+    --dataset Function-Gym
 ```
+
+> [!TIP]
+> **UserRL Integration**: Use `--dataset Function-Gym`, `--dataset Telepathy-Gym`, or `--dataset Turtle-Gym` to run rigorous comparative analysis against the UserRL benchmark (Qian et al. 2025c).
 
 > [!TIP]
 > **Scaling & Tuning**: Increase `--warmup-episodes` to improve proactivity. Adjust `--alpha` (0.0 to 1.0) to prioritize success (low alpha) or turn efficiency (high alpha).
@@ -91,8 +94,9 @@ uv run python main.py \
 
 **FREE-BAO**'s evaluation is built on a **User-in-the-Loop RL Simulation** using `langgraph`. 
 
+- **UserRL Datasets**: We perform experiment evaluation on three rigorous tasks from the **UserRL benchmark** (Qian et al., 2025c): **Function-Gym**, **Telepathy-Gym**, and **Turtle-Gym**.
 - **Success Matching**: Success is determined by the agent's ability to trigger the correct tool outputs (e.g., flight bookings, hotel confirmations) within the interaction loop.
-- **Turn Efficiency**: The framework penalizes "user bother" by weighting the number of turns in the Pareto-efficient retrieval logic.
+- **15-Turn Horizon**: Aligned with the UserRL spec, agents have up to 15 interaction turns to resolve tasks, penalizing "user bother" via the Pareto efficiency weights.
 - **WandB Integration**: All runs are fully traceable, with detailed results tables logged directly to your Weights & Biases project.
 
 ---
